@@ -1,6 +1,7 @@
 ﻿using EfCodeFirstExercise.Controllers;
 using EfCodeFirstExercise.Models;
 using System;
+using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
 
 namespace EfCodeFirstExercise
@@ -9,7 +10,7 @@ namespace EfCodeFirstExercise
     {
         public static async Task Main(string[] args)
         {
-            await TestOrder();
+            await TestOrderLine();
         }
 
         static async Task TestCustomer()
@@ -55,6 +56,20 @@ namespace EfCodeFirstExercise
             var ordCtrl = new OrdersController();
             var orders = await ordCtrl.GetAll();
         }
+
+        static async Task TestOrderLine()
+        {
+            var lineCtrl = new OrderLinesController();
+            var orderline = new OrderLine()
+            {
+                Id = 0,
+                OrderId = 1,
+                ProductId = 4,
+                Quantity = 1
+            };
+            await lineCtrl.Create(orderline);
+            //await lineCtrl.Update(orderline.Id, orderline);
+            //await lineCtrl.CalculateOrderTotal(1);
+        }
     }
 }
-//quantity is in orderline props. pk, 2 fk(order, product), quantity
