@@ -10,10 +10,10 @@ namespace EfCodeFirstExercise.Controllers
 {
     public class OrderLinesController
     {
-        private /*readonly*/ AppDbContext _context = null;
+        private readonly AppDbContext _context = null;
         private async Task CalculateOrderTotal(int orderId)
         {
-            _context = new AppDbContext();
+            //_context = new AppDbContext();
             var order = await _context.Orders.FindAsync(orderId); // reading the order
             if (order == null) throw new Exception("Order not found for calculation"); // making sure the order exists
             var orderLines = await _context.OrderLines.Where(ol => ol.OrderId == orderId).ToListAsync();
@@ -50,7 +50,14 @@ namespace EfCodeFirstExercise.Controllers
 
             _context.Entry(orderLine).State = EntityState.Modified;
             await _context.SaveChangesAsync();
+            Refresh(orderLine);
             await CalculateOrderTotal(orderLine.OrderId);
+        }
+
+        private void Refresh(OrderLine orderLine)
+        {
+            _context.Entry(orderLine).State = EntityState.Detached;
+            _context.OrderLines.Find(orderLine.Id);
         }
 
         public async Task Delete( OrderLine orderLine)

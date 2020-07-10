@@ -18,7 +18,7 @@ namespace EfCodeFirstExercise.Models
         public int CustomerId { get; set; }
         public virtual Customer Customer { get; set; } // virtual is when it wont be in the database, only in the runtime
 
-        //line 18-19 are for fk
+        public virtual IEnumerable<OrderLine> OrderLines { get; set; }
 
         public Order()
         {
@@ -26,3 +26,4 @@ namespace EfCodeFirstExercise.Models
         }
     }
 }
+        //line 18-19 are for fk

@@ -19,6 +19,8 @@ namespace EfCodeFirstExercise.Models
         [Column(TypeName = "decimal(12,2)")]
         public decimal TotalSales { get; set; } = 0;
 
+        public virtual IEnumerable<Order> Orders { get; set; } // Ienumerable is for a collection of things?
+
 
 
         public Customer() // ctor tabx2 
