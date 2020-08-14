@@ -32,7 +32,7 @@ namespace EfCodeFirstExercise.Models
             }
 
         } 
-        // protectrd means program class cannot call this, only if another class inherits this class
+        // protected means program class cannot call this, only if another class inherits this class
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Product>(e =>
